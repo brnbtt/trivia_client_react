@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-import { Container, Header, Form, Input, Button } from "semantic-ui-react";
+import {
+  Container,
+  Header,
+  Form,
+  Input,
+  Button,
+  Card,
+} from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
+import "./App.css";
 
 const socket = io("http://localhost:3333"); // replace with your websocket server URL
 
@@ -41,56 +49,72 @@ function App() {
   }, []);
 
   return (
-    <Container
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh",
-      }}
-    >
-      <Header as="h1" textAlign="center">
-        Trivia
-      </Header>
-      {!nameSubmitted && (
-        <Form onSubmit={handleSubmit}>
-          <Form.Field>
-            <label>Enter your name:</label>
-            <Input
-              type="text"
-              value={name}
-              autoComplete="new-password"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Field>
-          <Button type="submit">Submit</Button>
-        </Form>
-      )}
-      {nameSubmitted && (
-        <div>
-          <p>Hello, {name}!</p>
-          <Button onClick={handleAnswerClick}>Answer</Button>
-        </div>
-      )}
-      {showToast && (
-        <div
+    <div className="gradient">
+      <Container
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <Card
           style={{
-            position: "fixed",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "rgba(0, 0, 0, 0.8)",
-            color: "white",
-            padding: "10px 20px",
-            borderRadius: "4px",
-            zIndex: "9999",
+            padding: "15px",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            backdropFilter: "blur(500px)",
           }}
         >
-          {toastMessage}
-        </div>
-      )}
-    </Container>
+          <Header as="h1" textAlign="center" style={{ color: "white" }}>
+            Trivia
+          </Header>
+          {!nameSubmitted && (
+            <Form onSubmit={handleSubmit}>
+              <Form.Field>
+                <label style={{ color: "white" }}>Enter your name:</label>
+                <Input
+                  type="text"
+                  value={name}
+                  autoComplete="new-password"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Form.Field>
+              <div style={{ textAlign: "center" }}>
+                <Button type="submit" disabled={!name}>
+                  Submit
+                </Button>
+              </div>
+            </Form>
+          )}
+          {nameSubmitted && (
+            <div style={{ textAlign: "center" }}>
+              <Button onClick={handleAnswerClick} size="large">
+                Answer
+              </Button>
+            </div>
+          )}
+          {showToast && (
+            <div
+              style={{
+                position: "fixed",
+                bottom: "20px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                background: "rgba(0, 0, 0, 0.8)",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: "4px",
+                zIndex: "9999",
+              }}
+            >
+              {toastMessage}
+            </div>
+          )}
+        </Card>
+      </Container>
+    </div>
   );
 }
 

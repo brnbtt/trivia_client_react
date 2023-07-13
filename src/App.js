@@ -95,25 +95,16 @@ function App() {
               </Button>
             </div>
           )}
-          {showToast && (
-            <div
-              style={{
-                position: "fixed",
-                bottom: "20px",
-                left: "50%",
-                transform: "translateX(-50%)",
-                background: "rgba(0, 0, 0, 0.8)",
-                color: "white",
-                padding: "10px 20px",
-                borderRadius: "4px",
-                zIndex: "9999",
-              }}
-            >
-              {toastMessage}
-            </div>
-          )}
         </Card>
       </Container>
+      {showToast && (
+        <div
+          className="toast-container"
+          onAnimationEnd={() => setShowToast(false)}
+        >
+          {toastMessage}
+        </div>
+      )}
     </div>
   );
 }

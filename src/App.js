@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import io from "socket.io-client";
 import { Container, Header, Form, Input, Button } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
 const socket = io("http://localhost:3333"); // replace with your websocket server URL
 

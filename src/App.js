@@ -10,6 +10,7 @@ import {
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
+import "setimmediate";
 
 const socket = io("http://localhost:3333"); // replace with your websocket server URL
 

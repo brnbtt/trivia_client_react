@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import io from "socket.io-client";
+import { Container, Header, Form, Input, Button } from "semantic-ui-react";
+
+const socket = io("http://localhost:3333"); // replace with your websocket server URL
 
 function App() {
+  const [name, setName] = useState("");
+  const [nameSubmitted, setNameSubmitted] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setNameSubmitted(true);
+    socket.emit("nameEntered", name);
+  };
+
+  const handleAnswerClick = () => {
+    socket.emit("buttonPressed");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+      }}
+    >
+      <Header as="h1" textAlign="center">
+        Trivia
+      </Header>
+      {!nameSubmitted && (
+        <Form onSubmit={handleSubmit}>
+          <Form.Field>
+            <label>Enter your name:</label>
+            <Input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Field>
+          <Button type="submit">Submit</Button>
+        </Form>
+      )}
+      {nameSubmitted && (
+        <div>
+          <p>Hello, {name}!</p>
+          <Button onClick={handleAnswerClick}>Answer</Button>
+        </div>
+      )}
+    </Container>
   );
 }
 

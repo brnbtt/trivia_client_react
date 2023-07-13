@@ -65,22 +65,32 @@
   background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 10px;
   z-index: 9999;
-  animation: fade-in-out 5s ease-in-out;
+  animation: slide-in-out 2s ease-in-out forwards;
 }
 
-@keyframes fade-in-out {
+@keyframes slide-in-out {
   0% {
+    transform: translateY(100%);
     opacity: 0;
   }
-  10% {
+  20% {
+    transform: translateY(-2%);
     opacity: 1;
   }
-  90% {
+  40% {
+    transform: translateY(2%);
+  }
+  60% {
+    transform: translateY(-2%);
+  }
+  80% {
+    transform: translateY(1%);
     opacity: 1;
   }
   100% {
+    transform: translateY(-200%);
     opacity: 0;
   }
 }

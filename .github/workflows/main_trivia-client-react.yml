@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: "18.x"
 
+      - name: Delete node_modules directory
+        run: rm -rf node_modules
+
       - name: npm install, build, and test
         run: |
           npm install
@@ -51,12 +54,6 @@ jobs:
 
       - name: unzip artifact for deployment
         run: unzip release.zip
-
-      - name: Delete node_modules directory
-        run: rm -rf node_modules
-
-      - name: Install dependencies
-        run: npm install
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp

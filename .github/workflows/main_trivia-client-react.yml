@@ -24,6 +24,9 @@ jobs:
       - name: Delete node_modules directory
         run: rm -rf node_modules
 
+      - name: Delete package-lock.json
+        run: rm -f package-lock.json
+
       - name: npm install, build, and test
         run: |
           npm install

@@ -12,7 +12,7 @@ import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import "setimmediate";
 
-const socket = io("http://localhost:3333"); // replace with your websocket server URL
+const socket = io("https://trivia-server.azurewebsites.net"); // replace with your websocket server URL
 
 function App() {
   const [name, setName] = useState("");

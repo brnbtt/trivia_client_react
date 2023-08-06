@@ -41,11 +41,11 @@ function App() {
 
   useEffect(() => {
     socket.on("playerJoined", (playerName) => {
-      showToastMessage(`${playerName.name} has joined the game.`);
+      showToastMessage(`${playerName} has joined the game.`);
     });
 
     socket.on("playerLeft", (playerName) => {
-      showToastMessage(`${playerName.name} has left the game.`);
+      showToastMessage(`${playerName} has left the game.`);
     });
   }, []);
 

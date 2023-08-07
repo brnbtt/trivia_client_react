@@ -18,6 +18,8 @@ function App() {
   const [name, setName] = useState("");
   const [nameSubmitted, setNameSubmitted] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const [firstPlayerName, setFirstPlayerName] = useState("");
+  const [showFPName, setshowFPName] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
   const handleSubmit = (event) => {
@@ -47,10 +49,20 @@ function App() {
     socket.on("playerLeft", (playerName) => {
       showToastMessage(`${playerName} has left the game.`);
     });
+
+    socket.on("firstPlayer", (playerName) => {
+      setFirstPlayerName(playerName);
+      setshowFPName(true);
+    });
   }, []);
 
   return (
     <div className="gradient">
+      <Container>
+        {showFPName && (
+          <h1 style={{ color: "white" }}>First Player: {firstPlayerName}</h1>
+        )}
+      </Container>
       <Container
         style={{
           display: "flex",
